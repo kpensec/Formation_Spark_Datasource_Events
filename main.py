@@ -5,9 +5,13 @@ from pyspark.sql.functions import explode, lit
 WAREHOUSE_DIR = "C:\\Data\\spark-warehouse"
 TABLE_NAME = "Events"
 
+def usage():
+    print(sys.argv[0], "<inputURI>")
+
 if __name__ == "__main__":
     if len(sys.argv) > 2:
-        # USAGE
+        # TODO USAGE
+        usage()
         sys.exit(1)
     inputURI = sys.argv[1]
 
@@ -47,7 +51,7 @@ if __name__ == "__main__":
         .write.mode("overwrite") \
         .partitionBy(*partitioningTuple) \
         .format("parquet") \
-        .save("{dir}/{tableName}/{key}".format(**tableOptions))
+        .save("{dir}/{tableName}/key=1".format(**tableOptions))
     #sparkSession.read.parquet("spark-warehouse/parking_velo/department=Bouches-du-Rhône").show()
 
     sparkSession.read \
